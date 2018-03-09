@@ -7,7 +7,7 @@ def get_data():
 		{
 			"module_name": "Zahrani",
 			"color": "#d9f442",
-			"icon": "octicon octicon-zap",
+			"icon": "assets/htmldemo/images/zahrani.svg",
 			"type": "module",
 			"label": _("Zahrani")
 		}
