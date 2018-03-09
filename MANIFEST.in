@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include zahrani *.css
+recursive-include zahrani *.csv
+recursive-include zahrani *.html
+recursive-include zahrani *.ico
+recursive-include zahrani *.js
+recursive-include zahrani *.json
+recursive-include zahrani *.md
+recursive-include zahrani *.png
+recursive-include zahrani *.py
+recursive-include zahrani *.svg
+recursive-include zahrani *.txt
+recursive-exclude zahrani *.pyc
