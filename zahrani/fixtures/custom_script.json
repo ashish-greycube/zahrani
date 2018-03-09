@@ -1,0 +1,11 @@
+[
+ {
+  "docstatus": 0, 
+  "doctype": "Custom Script", 
+  "dt": "Purchase Order", 
+  "modified": "2018-03-09 07:59:21.025575", 
+  "name": "Purchase Order-Client", 
+  "script": "//Client:Zahrani. Task: Get items from Customer or Selling Quotation\n            frappe.ui.form.on('Purchase Order', {\n                refresh: function (frm) {\n\t\tconsole.log(\"11\");\n                    frm.add_custom_button(__('Customer Quotation'),\n                        function () {\n                            erpnext.utils.map_current_doc({\n                                method: \"zahrani.zahrani.quotation.make_purchase_order\",\n                                source_doctype: \"Quotation\",\n                                target: frm,\n                                setters: {\n                                    customer: frm.doc.customer || undefined\n                                },\n                                get_query_filters: {\n                                    company: frm.doc.company,\n                                    docstatus: 1,\n                                    status: [\"!=\", \"Lost\"],\n                                }\n                            });\n                        }, __(\"Add items from\"));\n\n                }\n            });\n//Client:Zahrani. Task: Get items from Customer or Selling Quotation", 
+  "script_type": "Client"
+ }
+]
