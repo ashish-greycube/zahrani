@@ -68,7 +68,8 @@ def calculate_values(accounts, gl_entries_by_account, filters):
 	}
 
 	company_abbr = frappe.db.get_value("Company", filters.get("company"), "abbr")
-	cost_of_goods_account = 'Cost of Goods Sold - '+ company_abbr
+	#cost_of_goods_account = 'Cost of Goods Sold - '+ company_abbr
+	cost_of_goods_account = company_abbr + ' - Cost of Goods Sold'
 
 	for d in accounts:
 		d.update(init.copy())
