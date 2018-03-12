@@ -68,8 +68,7 @@ def calculate_values(accounts, gl_entries_by_account, filters):
 	}
 
 	company_abbr = frappe.db.get_value("Company", filters.get("company"), "abbr")
-	#cost_of_goods_account = 'Cost of Goods Sold - '+ company_abbr
-	cost_of_goods_account = company_abbr + ' - Cost of Goods Sold'
+	cost_of_goods_account_type = 'Cost of Goods Sold'
 
 	for d in accounts:
 		d.update(init.copy())
@@ -80,9 +79,9 @@ def calculate_values(accounts, gl_entries_by_account, filters):
 			if cstr(entry.is_opening) != "Yes":
 				if entry.type == 'Income':
 					d["income"] += flt(entry.credit) - flt(entry.debit)
-				if entry.type == 'Expense' and entry.account != cost_of_goods_account:
+				if entry.type == 'Expense' and entry.account_type != cost_of_goods_account_type:
 					d["expense"] += flt(entry.debit) - flt(entry.credit)
-				if entry.type == 'Expense' and entry.account == cost_of_goods_account:
+				if entry.type == 'Expense' and entry.account_type == cost_of_goods_account_type:
 					d["cost_goods"] += flt(entry.debit) - flt(entry.credit)
 
 
@@ -190,7 +189,8 @@ def set_gl_entries_by_account(company, from_date, to_date, based_on, gl_entries_
 		additional_conditions.append("and posting_date >= %(from_date)s")
 
 	gl_entries = frappe.db.sql("""select account,posting_date, {based_on} as based_on, debit, credit, 
-		is_opening, (select root_type from `tabAccount` where name = account) as type
+		is_opening, (select root_type from `tabAccount` where name = account) as type,
+		(select account_type from `tabAccount` where name = account) as account_type
 		from `tabGL Entry` where company=%(company)s
 		{additional_conditions}
 		and posting_date <= %(to_date)s
