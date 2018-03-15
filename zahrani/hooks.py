@@ -119,5 +119,20 @@ app_license = "MIT"
 # override_whitelisted_methods = {
 # 	"frappe.desk.doctype.event.event.get_events": "zahrani.event.get_events"
 # }
-
-fixtures = ["Custom Script","Custom Field","Property Setter"]
+fixtures = [
+	{
+		"dt":"Custom Field",
+		"filters":[
+			["name", "in", [
+			"Stock Entry-branch",
+			"Stock Entry-isdamage",
+			"Purchase Invoice-branch",
+			"Sales Invoice-invoice_type",
+			"Sales Invoice-branch"]],
+		]
+	},
+    	{
+		"dt":"Custom Script",
+		"filters":[	]
+	}
+]
