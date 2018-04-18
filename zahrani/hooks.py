@@ -124,6 +124,8 @@ fixtures = [
 		"dt":"Custom Field",
 		"filters":[
 			["name", "in", [
+			"POS Profile-invoice_type",
+			"POS Profile-branch",
 			"Stock Entry-branch",
 			"Stock Entry-isdamage",
 			"Purchase Invoice-branch",
